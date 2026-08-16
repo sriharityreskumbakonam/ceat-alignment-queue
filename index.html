@@ -272,5 +272,30 @@
     setInterval(updateClock, 1000);
   </script>
 
-</body>
+</body> 
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBK0In5N5EvmC25Ue6IvDt-icCP1JezqOI",
+    authDomain: "ceat-alignment-queue.firebaseapp.com",
+    databaseURL: "https://ceat-alignment-queue-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "ceat-alignment-queue",
+    storageBucket: "ceat-alignment-queue.firebasestorage.app",
+    messagingSenderId: "481982113916",
+    appId: "1:481982113916:web:b20bbe0c11241cb16c41f9"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+
+  const queueRef = ref(database, "queue");
+
+  onValue(queueRef, (snapshot) => {
+    const data = snapshot.val();
+
+    console.log("Live queue data:", data);
+  });
+  </script>
 </html>
